@@ -1,9 +1,8 @@
 // Sticky Plugin
 // =============
 // Author: Anthony Garand
-// Improvements by German M. Bravo (Kronuz)
-//                 Brian W Sewell (bwsewell)
-// Date: 5/28/2011
+// Improvements by Brian W Sewell (bwsewell)
+// Date: 12/23/2011
 // Website: http://labs.anthonygarand.com/sticky
 // Description: Makes an element on the page stick on the screen
 
