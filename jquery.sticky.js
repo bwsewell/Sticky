@@ -10,7 +10,8 @@
 	$.fn.sticky = function(options) {
 		var defaults = {
 			topSpacing: 0,
-			className: 'is-sticky'
+			className: 'is-sticky',
+			scrollLength: 0
 		};  
 		var o = $.extend(defaults, options);
 		return this.each(function() {
@@ -29,15 +30,25 @@
 			$(window).scroll(function() {
 				var scrollTop = $(window).scrollTop();
 				var elementTop = stickyWrapper.offset().top;
-				if (scrollTop <= elementTop - topSpacing) {
+				var scrollLimit = elementTop + o.scrollLength + topSpacing;
+				if (scrollTop >= scrollLimit - topSpacing && o.scrollLength != 0) {
 					if (fixed) {
 						stickyElement.css('position', '').css('top', '').removeClass(o.className);
+						stickyWrapper.css('paddingTop', o.scrollLength + topSpacing);
+						fixed = false;
+					}
+				}
+				else if (scrollTop <= elementTop - topSpacing) {
+					if (fixed) {
+						stickyElement.css('position', '').css('top', '').removeClass(o.className);
+						stickyWrapper.css('paddingTop', 0);
 						fixed = false;
 					}
 				}
 				else if (!fixed) {
 					if (scrollTop >= elementTop - topSpacing) {
 						stickyElement.css('position', 'fixed').css('top', topSpacing).addClass(o.className);
+						stickyWrapper.css('paddingTop', 0);
 						fixed = true;
 					}
 				}
